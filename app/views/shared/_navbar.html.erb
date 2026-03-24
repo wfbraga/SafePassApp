@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
   <div class="container">
     <%= logo %>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
@@ -16,10 +16,29 @@
         <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
       </li>
     </ul>
-    <% if user_signed_in? %>
-      <%= button_to "Sign out", destroy_user_session_path, method: :delete, class: "btn btn-outline-danger" %>
+     <% if user_signed_in? %>
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <div class="dropdown">
+          <button class="nav-link dropdown-toggle" type="button" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="bi bi-person-circle"></i>
+          </button>
+          <ul class="dropdown-menu">
+            <li>
+              <a class="dropdown-item" href="#">
+                <small>Signed as</small>:<br>
+                <h6><%= current_user.email %></h6>
+              </a>
+            </li>
+            <li><hr class="dropdown-divider"></li>
+            <li><%= link_to "Account", edit_user_registration_path, class: "dropdown-item" %></li>
+            <li><%= link_to "Sign out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %></li>
+          </ul>
+        </div>
+      </ul>
     <% else %>
       <%= link_to "Sign in", new_user_session_path, class: "btn btn-outline-primary" %>
+      |
+      <%= link_to "Sign Up", new_user_registration_path, class: "btn btn-outline-info" %>
     <% end %>
     </div>
   </div>
