@@ -1,6 +1,7 @@
 module FlashHelper
   def flash_class(type)
-    case level
+    type = type.to_sym
+    case type
       when :notice then "info"
       when :success then "success"
       when :error then "danger"
