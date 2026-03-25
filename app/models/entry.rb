@@ -7,12 +7,13 @@ class Entry < ApplicationRecord
   validates :password, presence: true
   validate :url_must_be_valid
 
+  encrypts :username, deterministic: true
+  encrypts :password
+
   private
 
   def url_must_be_valid
-    url_is_valid = errors.add(:url, "must be valid") unless url.match? URI::DEFAULT_PARSER.make_regexp
-    unless url_is_valid
-      errors.add(:url, "must be valid")
-    end
+    debugger
+    errors.add(:url, "must be valid") unless url.match? URI::DEFAULT_PARSER.make_regexp
   end
 end
