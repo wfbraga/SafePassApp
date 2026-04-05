@@ -13,7 +13,6 @@ class Entry < ApplicationRecord
   private
 
   def url_must_be_valid
-    debugger
     errors.add(:url, "must be valid") unless url.match? URI::DEFAULT_PARSER.make_regexp
   end
 end
