@@ -1,5 +1,6 @@
 class EntriesController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_entry, only: [:show, :edit, :update, :destroy]
   def index
     @entries = current_user.entries
     @main_entry = @entries.first
@@ -15,17 +16,36 @@ class EntriesController < ApplicationController
 
   def create
     @entry = current_user.entries.build(entry_params)
-
     if @entry.save
-      redirect_to root_path, notice: "Entry was successfully created."
+      flash.now[:notice] = "#{@entry.name} was successfully created."
+      respond_to do |format|
+        format.html { redirect_to root_path }
+        format.turbo_stream {}
+      end
     else
-      flash[:alert] = "Sorry, there was an error creating the entry."
       render :new, status: :unprocessable_entity
     end
   end
 
-  private
-    def entry_params
-      params.expect(entry: [:name, :url, :username, :password])
+  def edit; end
+
+  def update; end
+
+  def destroy
+    @entry.destroy
+    flash.now[:notice] = "#{@entry.name} was successfully destroyed."
+    respond_to do |format|
+      format.html { redirect_to entries_url }
+      format.turbo_stream {}
     end
+  end
+
+
+  private
+  def set_entry
+    @entry = current_user.entries.find(params[:id])
+  end
+  def entry_params
+    params.expect(entry: [:name, :url, :username, :password])
+  end
 end
