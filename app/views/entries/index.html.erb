@@ -1,0 +1,22 @@
+
+<div class="row">
+  <div id="dashboard" class="card shadow-sm ">
+    <div class="entries-card">
+      <div class="entries-card__sidebar">
+        <% if @entries.any? %>
+          <%= render @entries %>
+          <% else %>
+            <div class="alert alert-info">
+              No entries yet.
+              <%= link_to 'Add one!', new_entry_path, class: 'badge text-bg-primary ms-3' %>
+            </div>
+          <% end %>
+      </div>
+      <div class="entries-card__main">
+        <%= turbo_frame_tag("main-dashboard") do %>
+          <%= render partial: 'entries/main', locals: { entry: @main_entry } %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
