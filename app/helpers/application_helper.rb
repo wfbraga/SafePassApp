@@ -12,4 +12,8 @@ module ApplicationHelper
   def format_time(time)
     time.strftime("%B %d, %Y at %I:%M %p")
   end
+
+  def render_flash_messages
+    turbo_stream.update "flash", partial: "shared/flash"
+  end
 end
