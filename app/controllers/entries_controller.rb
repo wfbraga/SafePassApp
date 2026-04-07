@@ -1,6 +1,6 @@
 class EntriesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_entry, only: [:show, :edit, :update, :destroy]
+  before_action :set_entry, only: [ :show, :edit, :update, :destroy ]
   def index
     @entries = current_user.entries
     @main_entry = @entries.first
@@ -29,7 +29,9 @@ class EntriesController < ApplicationController
 
   def edit; end
 
-  def update; end
+  def update
+
+  end
 
   def destroy
     @entry.destroy
