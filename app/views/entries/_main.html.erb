@@ -29,7 +29,7 @@
         <li id="entry-username" class="list-group-item">
           <%= turbo_frame_tag(:entry_username) do %>
             <div class="d-flex justify-content-between align-items-center">
-              <div class="form-floating">
+              <div class="form-floating w-100">
                 <%= text_field_tag :username,  entry.username, readonly: true, class: "form-control-plaintext", placeholder: "Username" %>
                 <%= label_tag :username, "Username", class: "fw-bold text-dark"%>
               </div>
@@ -45,7 +45,7 @@
         <li id="entry-password" class="list-group-item">
           <%= turbo_frame_tag(:entry_password) do %>
             <div class="d-flex justify-content-between align-items-center">
-              <div class="form-floating">
+              <div class="form-floating w-100">
                 <%= text_field_tag :password,  entry.password, readonly: true, class: "form-control-plaintext", placeholder: "Password", type: "password" %>
                 <%= label_tag :password, "Password", class: "fw-bold text-dark"%>
               </div>
