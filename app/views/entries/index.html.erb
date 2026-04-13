@@ -1,26 +1,44 @@
 
 <div class="row">
   <div class="entries-actions card">
-    <div></div>
+    <div class="entry-search">
+      <%= form_with url: entries_path, method: :get, data: { turbo_frame: 'search-results' }, class: 'position-relative' do |f| %>
+        <div class="form-floating">
+          <%= f.text_field(:name, placeholder: 'Search entries by name', class: 'form-control') %>
+          <%= f.label(:search, for: :name) %>
+        </div>
+        <div class="entry-search-button">
+          <%= f.button(class: 'btn btn-primary') do %>
+            <i class="bi bi-search"></i>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
     <%= link_to '+ New Entry', new_entry_path, class: 'btn btn-primary', data: { turbo_frame: 'main-dashboard' }%>
   </div>
   <div id="dashboard" class="card shadow-sm ">
     <div class="entries-card">
       <div class="entries-card__sidebar">
-        <% if @entries.any? %>
-          <nav id="entries-list" class="nav flex-column">
-            <%= render @entries %>
-          </nav>
-        <% else %>
-          <div class="alert alert-info">
-            No entries yet.
-            <%= link_to 'Add one!', new_entry_path, class: 'badge text-bg-primary ms-3' %>
-          </div>
+        <%= turbo_frame_tag("search-results") do %>
+        <nav id="entries-list" class="nav flex-column">
+          <% if @entries.any? %>
+            <nav id="entries-list" class="nav flex-column">
+              <%= render @entries %>
+            </nav>
+          <% else %>
+            <div class="alert alert-info">
+              No entries.
+              <%= link_to 'Add one!', new_entry_path, class: 'badge text-bg-primary ms-3' %>
+            </div>
+          <% end %>
+        </nav>
         <% end %>
       </div>
       <div class="entries-card__main">
         <%= turbo_frame_tag("main-dashboard") do %>
-          <%= render partial: 'entries/main', locals: { entry: @main_entry } %>
+          <% if @main_entry %>
+            <%= render partial: 'entries/main', locals: { entry: @main_entry } %>
+          <% end %>
         <% end %>
       </div>
     </div>
