@@ -2,8 +2,18 @@ class EntriesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_entry, only: [ :show, :edit, :update, :destroy ]
   def index
-    @entries = current_user.entries
+    @entries = current_user.entries.search(params[:name]) || current_user.entries.order(:name)
     @main_entry = @entries.first
+
+    return unless params[:name].present?
+    if @entries.length == 1
+      render turbo_stream: [
+        turbo_stream.update('main-dashboard', partial: 'entries/main', locals: { entry: @entries.first } ),
+        turbo_stream.update('entries-list', partial: 'entries/entry', locals: { entry: @entries.first })
+      ]
+    elsif @entries.empty?
+      flash.now[:notice] = "No entries found"
+    end
   end
 
   def show
@@ -30,7 +40,17 @@ class EntriesController < ApplicationController
   def edit; end
 
   def update
-
+    params = entry_params if entry_params[:password].blank?
+    params.delete(:password) if params[:password].blank?
+    if @entry.update(params)
+      flash.now[:notice] = "#{@entry.name} was successfully updated."
+      respond_to do |format|
+        format.html { redirect_to @entry }
+        format.turbo_stream {}
+      end
+    else
+      render :edit, status: :unprocessable_entity
+    end
   end
 
   def destroy
