@@ -1,13 +1,21 @@
 
 <div class="row">
   <div class="entries-actions card">
-    <div class="entry-search">
+    <div class="entry-search" data-controller="search">
       <%= form_with url: entries_path, method: :get, data: { turbo_frame: 'search-results' }, class: 'position-relative' do |f| %>
         <div class="form-floating">
-          <%= f.text_field(:name, placeholder: 'Search entries by name', class: 'form-control') %>
+          <%= f.text_field(:name,
+                           placeholder: 'Search entries by name',
+                           class: 'form-control',
+                           data: { action: 'input->search#toggleClearButton'}) %>
           <%= f.label(:search, for: :name) %>
         </div>
         <div class="entry-search-button">
+           <%= link_to(root_path,
+                       class: 'btn btn-sm btn-outline-danger rounded-circle p-0 lh-1 me-2 d-none',
+                       data: { search_target: 'clearButton'} ) do %>
+            <i class="bi bi-x-lg"></i>
+          <% end %>
           <%= f.button(class: 'btn btn-primary') do %>
             <i class="bi bi-search"></i>
           <% end %>
