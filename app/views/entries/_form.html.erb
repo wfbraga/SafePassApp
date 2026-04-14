@@ -1,0 +1,29 @@
+<% if @entry.errors.any? %>
+  <div class="alert alert-danger">
+    <h5 class="alert-heading">Correct the <%= pluralize(@entry.errors.count, 'error') %>:</h5>
+    <ul>
+      <% @entry.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+<%= form_with model: @entry  do |f| %>
+  <div class="form-floating mb-3">
+    <%= f.text_field(:name, placeholder: "Name", class: "form-control" )%>
+    <%= f.label(:name) %>
+  </div>
+  <div class="form-floating mb-3">
+    <%= f.text_field(:url, placeholder: "URL", class: "form-control" )%>
+    <%= f.label(:url) %>
+  </div>
+  <div class="form-floating mb-3">
+    <%= f.text_field(:username, placeholder: "username", class: "form-control", autocomplete: "username" )%>
+    <%= f.label(:username) %>
+  </div>
+  <div class="form-floating mb-3">
+    <%= f.password_field(:password, placeholder: "password", class: "form-control", autocomplete: "current-password" )%>
+    <%= f.label(:password) %>
+  </div>
+  <%= f.submit("New Entry", class: "btn btn-primary") %>
+<% end %>
