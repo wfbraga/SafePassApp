@@ -9,11 +9,11 @@
       <%= f.label(:url, class: 'fw-bold text-dark') %>
     </div>
     <div class="form-floating edit-username">
-      <%= f.text_field(:username, placeholder: "username", class: "form-control" )%>
+      <%= f.text_field(:username, placeholder: "username", class: "form-control", autocomplete: "username" )%>
       <%= f.label(:username, class: 'fw-bold text-dark') %>
     </div>
     <div class="form-floating edit-password">
-      <%= f.password_field(:password, placeholder: "password", class: "form-control" )%>
+      <%= f.password_field(:password, placeholder: "password", class: "form-control", autocomplete: "current-password" )%>
       <%= f.label(:password, class: 'fw-bold text-dark') %>
     </div>
     <div class="entry-edit-actions">

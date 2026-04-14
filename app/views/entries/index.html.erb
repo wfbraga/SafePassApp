@@ -7,6 +7,7 @@
           <%= f.text_field(:name,
                            placeholder: 'Search entries by name',
                            class: 'form-control',
+                           autocomplete: 'off',
                            data: { action: 'input->search#toggleClearButton'}) %>
           <%= f.label(:search, for: :name) %>
         </div>

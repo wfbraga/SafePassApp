@@ -18,11 +18,11 @@
     <%= f.label(:url) %>
   </div>
   <div class="form-floating mb-3">
-    <%= f.text_field(:username, placeholder: "username", class: "form-control" )%>
+    <%= f.text_field(:username, placeholder: "username", class: "form-control", autocomplete: "username" )%>
     <%= f.label(:username) %>
   </div>
   <div class="form-floating mb-3">
-    <%= f.password_field(:password, placeholder: "password", class: "form-control" )%>
+    <%= f.password_field(:password, placeholder: "password", class: "form-control", autocomplete: "current-password" )%>
     <%= f.label(:password) %>
   </div>
   <%= f.submit("New Entry", class: "btn btn-primary") %>
