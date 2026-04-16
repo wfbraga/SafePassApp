@@ -10,7 +10,7 @@ class Entry < ApplicationRecord
   encrypts :username, deterministic: true
   encrypts :password
 
-  scope :search_name, -> (name) {
+  scope :search_name, ->(name) {
     where("name ILIKE ?", "%#{name}%") if name.present?
   }
   def self.search(name)

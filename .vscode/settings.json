@@ -1,0 +1,11 @@
+{
+  "ruby-lsp.formatter": "rubocop",
+  "ruby-lsp.lint": "rubocop",
+  "[ruby]": {
+    "editor.defaultFormatter": "Shopify.ruby-lsp",
+    "editor.formatOnSave": true,
+    "editor.formatOnType": true,
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true
+  }
+}

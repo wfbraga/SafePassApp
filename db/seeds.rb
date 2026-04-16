@@ -10,7 +10,7 @@ user = User.create!(
 )
 
 # Create 10 realistic entries for the user
-platforms = ["Google", "Facebook", "Amazon", "Netflix", "Spotify", "GitHub", "LinkedIn", "Twitter", "Instagram", "Reddit"]
+platforms = [ "Google", "Facebook", "Amazon", "Netflix", "Spotify", "GitHub", "LinkedIn", "Twitter", "Instagram", "Reddit" ]
 platforms.each do |platform|
   Entry.create!(
     name: platform,
