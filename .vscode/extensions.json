@@ -1,0 +1,8 @@
+{
+  "recommendations": [
+    "Shopify.ruby-lsp",
+    "Shopify.ruby-lsp-rails",
+    "marcoroth.stimulus-lsp",
+    "castwide.solargraph"
+  ]
+}
