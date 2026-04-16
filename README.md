@@ -1,24 +1,38 @@
-# README
+# SafePassApp
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+**SafePassApp** is an **internal tool to share passwords with IT coworkers**, allowing access **only from the internal network**.
 
-Things you may want to cover:
+This repository is also a **study project** focused on **Hotwire + Stimulus** (SPA-style UX with server-rendered Rails patterns).
 
-* Ruby version
+---
 
-* System dependencies
+## Goals
 
-* Configuration
+- Share credentials internally with the IT team
+- Restrict usage to the internal network
+- Provide a modern SPA-like user experience using Hotwire/Stimulus
+- Support integration with a (coming soon) Chrome extension
 
-* Database creation
+---
 
-* Database initialization
+## Current Status
 
-* How to run the test suite
+Implemented / in progress:
 
-* Services (job queues, cache servers, search engines, etc.)
+- Saving accounts (credential entries)
+- Encryption
+- SPA UX done (Hotwire/Stimulus)
+- API for Chrome extension
+  - JWT authentication
 
-* Deployment instructions
+---
 
-* ...
+## TODO
+
+- Sharing system to allow other users to see entries created by other users (permissions + visibility model)
+
+---
+
+## Coming Soon
+
+- **Chrome extension** (will be released in a separate repository)
