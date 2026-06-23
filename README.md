@@ -1,38 +1,29 @@
 # SafePassApp
 
-**SafePassApp** is an **internal tool to share passwords with IT coworkers**, allowing access **only from the internal network**.
+**SafePassApp** is an internal app for the IT team to store and share credentials safely, with access limited to the internal network.
 
-This repository is also a **study project** focused on **Hotwire + Stimulus** (SPA-style UX with server-rendered Rails patterns).
-
----
-
-## Goals
-
-- Share credentials internally with the IT team
-- Restrict usage to the internal network
-- Provide a modern SPA-like user experience using Hotwire/Stimulus
-- Support integration with a (coming soon) Chrome extension
+Built as a study project with **Rails + Hotwire + Stimulus**, it aims for a smooth, SPA-like feel without giving up server-rendered simplicity.
 
 ---
 
-## Current Status
+## What it does
 
-Implemented / in progress:
-
-- Saving accounts (credential entries)
-- Encryption
-- SPA UX done (Hotwire/Stimulus)
-- API for Chrome extension
-  - JWT authentication
+- Save account credentials
+- Encrypt sensitive data
+- Share credential entries with coworkers
+- Deliver a fast SPA-style UX with Hotwire/Stimulus
+- Provide an API for the Chrome extension (JWT authentication)
 
 ---
 
-## TODO
+## Why it exists
 
-- Sharing system to allow other users to see entries created by other users (permissions + visibility model)
+- Keep password sharing inside the company walls
+- Make day-to-day IT handoffs less painful
+- Learn modern Rails patterns while building something useful
 
 ---
 
 ## Coming Soon
 
-- **Chrome extension** (will be released in a separate repository)
+- **Chrome extension** (in a separate repository) so sharing passwords can be just a couple of clicks away 🚀
