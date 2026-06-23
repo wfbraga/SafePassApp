@@ -3,7 +3,9 @@ class EntriesController < ApplicationController
   before_action :set_entry, only: [ :show, :edit, :update, :destroy ]
   def index
     @entries = current_user.entries.search(params[:name]) || current_user.entries.order(:name)
+    @entries = (@entries.to_a + Entry.joins(:shares).where(shares: { user_id: current_user.id }).to_a).uniq
     @main_entry = @entries.first
+    @colleagues = User.where.not(id: current_user.id).order(email: :asc)
 
     return unless params[:name].present?
     if @entries.length == 1
@@ -18,6 +20,8 @@ class EntriesController < ApplicationController
 
   def show
     @entry = current_user.entries.find(params[:id])
+    @main_entry = @entry
+    @colleagues = User.where.not(id: current_user.id).order(email: :asc)
   end
 
   def new
@@ -27,6 +31,8 @@ class EntriesController < ApplicationController
   def create
     @entry = current_user.entries.build(entry_params)
     if @entry.save
+      @main_entry = @entry
+      @colleagues = User.where.not(id: current_user.id).order(email: :asc)
       flash.now[:notice] = "#{@entry.name} was successfully created."
       respond_to do |format|
         format.html { redirect_to root_path }
@@ -40,6 +46,8 @@ class EntriesController < ApplicationController
   def edit; end
 
   def update
+    @main_entry = @entry
+    @colleagues = User.where.not(id: current_user.id).order(email: :asc)
     params = entry_params if entry_params[:password].blank?
     params.delete(:password) if params[:password].blank?
     if @entry.update(params)
@@ -62,6 +70,20 @@ class EntriesController < ApplicationController
     end
   end
 
+
+  def share
+    @entry = current_user.entries.find(params[:entry_id])
+    @colleagues = User.where.not(id: current_user.id).order(email: :asc)
+    @users_to_share = User.where(id: params[:colleagues_id])
+
+    @users_to_share.each do |user|
+      Share.create_or_find_by(entry: @entry, user: user)
+    end
+    flash.now[:notice] = "#{@entry.name} was successfully shared."
+    render turbo_stream: [
+      turbo_stream.update("share_with_colleagues", partial: "entries/colleagues", locals: { main_entry: @entry, colleagues: @colleagues })
+    ]
+  end
 
   private
   def set_entry
