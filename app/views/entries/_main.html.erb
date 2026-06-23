@@ -108,6 +108,11 @@
       </div>
     </div>
   </div>
+  <%= turbo_frame_tag(:share_with_colleagues, class: 'w-100') do %>
+
+
+    <%= render "entries/colleagues", colleagues: @colleagues, entry: @main_entry %>
+  <% end %>
   <div class="text-center">
     <div>
       Modified at: <%= format_time(entry.updated_at) %>

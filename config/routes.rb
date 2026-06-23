@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root "entries#index"
   get "/home", to: "pages#home"
   get "/about", to: "pages#about"
+  post "/share", to: "entries#share"
   resources :entries
 
   namespace :api do
