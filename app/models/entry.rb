@@ -1,5 +1,7 @@
 class Entry < ApplicationRecord
   belongs_to :user
+  has_many :shares, dependent: :destroy
+  has_many :shared_users, through: :shares, source: :user
 
   validates :name, presence: true
   validates :url, presence: true
