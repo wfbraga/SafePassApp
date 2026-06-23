@@ -2,12 +2,12 @@
   <div class="card-body">
     <h5 class="card-title">Compartir Contraseña</h5>
     <p>Ataje Ctrl o Shift para seleccionar más de un usuario a la vez </p>
-    <% if entry.shared_users.count > 0 %>
-      <p>Compartido con: <%= entry.shared_users.map { |user| user.email.split('@').first }.join(', ') %></p>
+    <% if main_entry.shared_users.count > 0 %>
+      <p>Compartido con: <%= main_entry.shared_users.map { |user| user.email.split('@').first }.join(', ') %></p>
     <% end %>
     <%= form_with url: "/share", method: :post do |f| %>
       <div class="form-control mb-3">
-        <%= f.hidden_field :entry_id, value: entry.id %>
+        <%= f.hidden_field :entry_id, value: main_entry.id %>
         <%= f.label(:colleagues, class: 'fw-bold text-dark') %>
         <%= f.collection_select :colleagues_id, colleagues, :id, :email, { include_blank: "Seleccione un usuario", multiple: true }, { class: "form-select" } %>
 

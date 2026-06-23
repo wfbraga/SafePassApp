@@ -81,7 +81,7 @@ class EntriesController < ApplicationController
     end
     flash.now[:notice] = "#{@entry.name} was successfully shared."
     render turbo_stream: [
-      turbo_stream.update("share_with_colleagues", partial: "entries/colleagues", locals: { entry: @entry, colleagues: @colleagues })
+      turbo_stream.update("share_with_colleagues", partial: "entries/colleagues", locals: { main_entry: @entry, colleagues: @colleagues })
     ]
   end
 
