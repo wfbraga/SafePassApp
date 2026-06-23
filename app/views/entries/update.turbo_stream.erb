@@ -3,5 +3,5 @@
 <%= turbo_stream.update 'main-dashboard', partial: 'entries/main', locals: { entry: @entry, colleagues: @colleagues } %>
 <%= turbo_stream.update 'share_with_colleagues',
                         partial: 'entries/colleagues',
-                        locals: { entry: @entry, colleagues: @colleagues }
+                        locals: { main_entry: @entry, colleagues: @colleagues }
 %>
