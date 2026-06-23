@@ -31,7 +31,7 @@
             <div class="d-flex justify-content-between align-items-center">
               <div class="form-floating w-100">
                 <%= text_field_tag :username,  entry.username, readonly: true, class: "form-control-plaintext", placeholder: "Username", autocomplete: "username" %>
-                <%= label_tag :username, "Username", class: "fw-bold text-dark"%>
+                <%= label_tag :username, "Username", class: "fw-bold text-dark" %>
               </div>
               <div class="action d-flex">
                 <button
@@ -61,8 +61,8 @@
                                    placeholder: "Password",
                                    type: "password",
                                    autocomplete: "current-password",
-                                   data: { toggle_password_target: 'input'}%>
-                <%= label_tag :password, "Password", class: "fw-bold text-dark"%>
+                                   data: { toggle_password_target: 'input'} %>
+                <%= label_tag :password, "Password", class: "fw-bold text-dark" %>
               </div>
               <div class="action d-flex">
                 <button
@@ -108,6 +108,11 @@
       </div>
     </div>
   </div>
+  <%= turbo_frame_tag(:share_with_colleagues, class: 'w-100') do %>
+
+
+    <%= render "entries/colleagues", colleagues: @colleagues, main_entry: entry %>
+  <% end %>
   <div class="text-center">
     <div>
       Modified at: <%= format_time(entry.updated_at) %>
